@@ -1,0 +1,23 @@
+vector<int>dist(V,100000000);
+        dist[S]=0;
+        for(int i=1;i<=V-1;i++){
+            for(auto p:edges){
+                int u=p[0];
+                int v=p[1];
+                int wt=p[2];
+                if(dist[u]!=100000000 && dist[u]+wt<dist[v]){
+                    dist[v]=dist[u]+wt;
+                }
+            }
+        }
+         for(int i=1;i<=V-1;i++){
+            for(auto p:edges){
+                int u=p[0];
+                int v=p[1];
+                int wt=p[2];
+                if(dist[u]!=100000000 && dist[u]+wt<dist[v]){
+                    return {-1};
+                }
+            }
+        }
+        return dist;
