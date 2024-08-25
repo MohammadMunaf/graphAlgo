@@ -1,0 +1,49 @@
+//Dijkstra Algorithm
+approch 2
+    vector <int> dijkstra(int V, vector<vector<int>> adj[], int s)
+    {
+        // Code here
+        vector<int>ans(V,INT_MAX),visited(V,false);
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        ans[s]=0;
+        pq.push({0,s});
+        while(!pq.empty()){
+            auto p=pq.top();
+            pq.pop();
+            int d=p.first;
+            int node=p.second;
+            if(visited[node])   continue;
+            ans[node]=d;
+            visited[node]=true;
+            for(auto&n:adj[node]){
+                int nbr=n[0];
+                int dist=n[1];
+                pq.push({d+dist,nbr});
+            }
+        }
+        return ans;
+    }
+
+approch 2
+    vector <int> dijkstra(int V, vector<vector<int>> adj[], int s)
+    {
+        // Code here
+        vector<int>ans(V,INT_MAX);
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        ans[s]=0;
+        pq.push({0,s});
+        while(!pq.empty()){
+            auto p=pq.top();
+            pq.pop();
+            int d=p.first;
+            int node=p.second;
+            for(auto&n:adj[node]){
+                int nbr=n[0];
+                int dist=n[1];
+                if(d+dist<ans[nbr]){
+                    ans[nbr]=d+dist;
+                    pq.push({d+dist,nbr});
+                }
+            }
+        }
+        return ans;
